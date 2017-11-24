@@ -1,0 +1,40 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: release1-demoservice1
+  labels:
+    app: demoservice1
+    chart: demoservice1-0.1.2
+    release: release1
+    heritage: Tiller
+    appversion: "5"
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: demoservice1
+        release: release1
+        imageinfo :
+        appversion: "5"
+    spec:
+      containers:
+        - name: demoservice1
+          image: "verchol/demo-service1:v5"
+          env:
+            - name: appversion
+              value : "5"
+
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+          readinessProbe:
+            httpGet:
+              path: /mongo
+              port: 3000
+          resources:
+            {}

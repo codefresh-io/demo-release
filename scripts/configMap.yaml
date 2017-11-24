@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: special-config
+  namespace: default
+data:
+  sha: "1234"
+  branch: master
+  repo: "verchol/demo-chat"
