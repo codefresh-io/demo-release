@@ -7,26 +7,18 @@ metadata:
     chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
-  #  appversion: "{{.Values.appversion}}"
 spec:
   replicas: {{ .Values.replicaCount }}
   template:
     metadata:
       labels:
         app: {{ template "name" . }}
-        release: {{ .Release.Name }}
-      #  imageinfo : {{.Values.test.key}}
         appversion: "{{.Values.appversion}}"
+        release: {{ .Release.Name }}
     spec:
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}:{{.Values.tag}}"
-          #command: ["/bin/sh", "-c", "sleep 100000"]
-          envFrom :
-            - configMapRef:
-                name: {{ template "name" . }}-config
-
-
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: {{ .Values.service.internalPort }}
