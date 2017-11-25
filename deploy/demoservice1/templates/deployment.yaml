@@ -16,7 +16,7 @@ spec:
         app: {{ template "name" . }}
         release: {{ .Release.Name }}
       #  imageinfo : {{.Values.test.key}}
-        appversion: "{{.Values.appversion}}"
+        appversion: "{{.Values.appversion}}" 
     spec:
       containers:
         - name: {{ .Chart.Name }}
