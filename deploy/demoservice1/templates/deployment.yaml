@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}:v{{.Values.appversion}}"
+          image: "{{ .Values.image.repository }}:{{.Values.tag}}"
           #command: ["/bin/sh", "-c", "sleep 100000"]
           envFrom :
             - configMapRef:
