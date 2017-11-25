@@ -13,8 +13,8 @@ image:
 test:
   image: verchol/demo-service1:v2
 service:
-  name: demo-servic1
-  type: NodePort
+  name: demo-service1
+  type: LoadBalancer
   externalPort: 80
   internalPort: 3000
 commit:
