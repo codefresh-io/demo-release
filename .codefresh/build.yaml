@@ -1,5 +1,10 @@
 version: '1.0'
 steps:
+  main_clone:
+    image: alpine/git
+    commands:
+       - git clone https://github.com/codefresh-io/demo-release.git
+       - cd ./demo-release && git status
   build_image:
     type: build
     title: Step Title
