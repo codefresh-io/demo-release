@@ -16,16 +16,23 @@ spec:
         app: {{ template "name" . }}
         release: {{ .Release.Name }}
       #  imageinfo : {{.Values.test.key}}
-        appversion: "{{.Values.appversion}}" 
+        appversion: "{{.Values.appversion}}"
     spec:
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{.Values.tag}}"
-          #command: ["/bin/sh", "-c", "sleep 100000"]
+          command: ["/bin/sh", "-c", "ls /etc/foo"]
           envFrom :
             - configMapRef:
                 name: {{ template "name" . }}-config
-
+          volumeMounts:
+          - name: foo
+              mountPath: "/etc/foo"
+              readOnly: true
+       volumes:
+          - name: foo
+            secret:
+              secretName: db-user-pass
 
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
