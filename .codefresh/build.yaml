@@ -19,5 +19,5 @@ steps:
     candidate: ${{build_image}}
     tag: ${{CF_BRANCH_TAG_NORMALIZED}}
     image_name: verchol/demorelease
-    registry: dockerhub
+    registry:  my-dockerhub
     fail_fast: false
