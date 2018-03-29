@@ -1,16 +1,21 @@
 version: '1.0'
 steps:
-  custom_clone:
-    type: git-clone
-    title: Step Title
-    description: Step description
-    working_directory: /demo-release
-    repo: https://github.com/codefresh-io/demo-release.git
-    revision: b6641fc01cd77199be75fc2b7e4a25c8dca1fcc4
+  #custom_clone:
+  #  type: git-clone
+  #  title: Step Title
+  #  description: Step description
+    #working_directory: /demo-release
+  #  repo: https://github.com/codefresh-io/demo-release.git
+  #  revision: b6641fc01cd77199be75fc2b7e4a25c8dca1fcc4
     #credentials:
      # username: subject
       #password: credentials
-    fail_fast: false
-    when:
-      branch:
-        ignore: [ master ]
+  #  fail_fast: false
+    #when:
+      #branch:
+        #ignore: [ master ]
+  step1:
+    title: Step1
+    image: alpine/git
+    commands:
+     - git status || echo $?
