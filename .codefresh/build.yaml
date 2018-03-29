@@ -1,0 +1,23 @@
+version: '1.0'
+steps:
+  build_image:
+    type: build
+    title: Step Title
+    description: Free text description
+    image_name: verchol/demorelease
+    tag: ${{CF_BRANCH_TAG_NORMALIZED}}
+    build_arguments:
+      - key=value
+    fail_fast: false
+    metadata:
+      set:
+        - qa: dev
+
+  pushToDockerHub :
+    type: push
+    title: push to DockerHub
+    candidate: ${{build_image}}
+    tag: ${{CF_BRANCH_TAG_NORMALIZED}}
+    image_name: verchol/demorelease
+    registry: dockerhub
+    fail_fast: false
