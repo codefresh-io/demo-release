@@ -5,6 +5,11 @@ steps:
     commands:
        - git clone https://github.com/codefresh-io/demo-release.git
        - cd ./demo-release && git status
+  check: 
+    image: alpine
+    commands:
+     - ls .
+    
   build_image:
     type: build
     title: Step Title
