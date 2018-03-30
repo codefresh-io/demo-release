@@ -9,6 +9,7 @@ steps:
     type: build
     title: Step Title
     description: Free text description
+    working_directory: ./demo-release
     image_name: verchol/demorelease
     tag: ${{CF_BRANCH_TAG_NORMALIZED}}
     build_arguments:
