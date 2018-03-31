@@ -4,7 +4,7 @@ steps:
     title: udpate_helm_chart
     image: alpine
     commands:
-      - echo "$EVENT_NAME : $EVENT_TAG"
+      - echo  $EVENT_NAME - $EVENT_TAG
   step1:
     title: Step1
     image: alpine/git
