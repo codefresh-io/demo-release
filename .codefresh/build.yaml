@@ -5,16 +5,17 @@ steps:
     commands:
        - git clone https://github.com/codefresh-io/demo-release.git
        - cd ./demo-release && git status
-  check: 
+  check:
     image: alpine
     commands:
-     - ls .
-    
+     - apk add --no-cache tree
+     - tree .
+
   build_image:
     type: build
     title: Step Title
     description: Free text description
-    working_directory: ./demo-release
+    working_directory: /codefrehs/voluemdemo-release
     image_name: verchol/demorelease
     tag: ${{CF_BRANCH_TAG_NORMALIZED}}
     build_arguments:
