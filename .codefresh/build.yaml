@@ -23,7 +23,9 @@ steps:
     fail_fast: false
     metadata:
       set:
-        - qa: dev
+        - status: "ready4testing"
+        - security: "N/A"
+        - quality : "true"
 
   pushToDockerHub :
     type: push
