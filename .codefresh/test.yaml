@@ -1,7 +1,14 @@
 version: '1.0'
 steps:
+  update_helm_chart:
+    title: udpate_helm_chart
+    image: alpine
+    commands:
+      - env
+      - echo user $EVENT_PUSHER did $EVENT_NAME  $EVENT_NAMESPACE $EVENT_TAG
+      - echo we are about to update helm chart and deploy
   step1:
     title: Step1
     image: alpine/git
     commands:
-     - git status 
+     - git status || echo $?
