@@ -1,1 +1,1 @@
-# demo-release 1.1
+# demo-release 1.2
