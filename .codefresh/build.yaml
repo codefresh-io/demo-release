@@ -1,37 +1,47 @@
 version: '1.0'
 steps:
-  main_clone:
-    image: alpine/git
-    commands:
-       - git clone https://github.com/codefresh-io/demo-release.git
-       - cd ./demo-release && git status
-  check:
+  #main_clone:
+   #image: alpine/git
+   #commands:
+   #	- rm -rf versioner
+   # - git clone https://github.com/verchol/versioner.git versioner
+
+  show_commit_payload:
+    title: udpate_helm_chart
     image: alpine
     commands:
-     - apk add --no-cache tree
-     - tree -d .
-
-  build_image:
+      - env
+      - echo user $EVENT_PUSHER did $EVENT_NAME  $EVENT_NAMESPACE $EVENT_TAG
+      - echo we are about to update helm chart and deploy
+  step1:
+    title: version test
+    image: verchol/versioner:master
+    working_directory: /src
+    entry_point:
+     - sh
+    commands:
+     - apk update
+     - apk add git
+     - git pull origin master
+     - ls ./scripts
+     - sh ./scripts/version.sh 
+     - cf_export CF_VERSION=$(cat /codefresh/volume/cache/lastversion)
+  
+    
+  step2:
+    image: alpine
+    commands:
+      - env
+ 
+  build:
     type: build
-    title: Step Title
-    description: Free text description
-    working_directory: /codefresh/volume/demo-release
-    image_name: verchol/demorelease
-    tag: ${{CF_BRANCH_TAG_NORMALIZED}}
+    #working_directory: /src
+    dockerfile:  Dockerfile
+    image_name: verchol/demo-release
+    tag: ${{CF_VERSION}}
     build_arguments:
       - key=value
     fail_fast: false
     metadata:
       set:
-        - status: "ready4testing"
-        - security: "N/A"
-        - quality : "true"
-
-  pushToDockerHub :
-    type: push
-    title: push to DockerHub
-    candidate: ${{build_image}}
-    tag: ${{CF_BRANCH_TAG_NORMALIZED}}
-    image_name: verchol/demorelease
-    registry:  my-dockerhub
-    fail_fast: false
+        - qa: pending 
