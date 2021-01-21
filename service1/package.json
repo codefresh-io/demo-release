@@ -14,7 +14,7 @@
     "express": "^4.16.2",
     "kubemote": "^1.0.10",
     "mongodb": "^2.2.33",
-    "morgan": "^1.9.0",
+    "morgan": "^1.10.0",
     "serve-favicon": "^2.4.5"
   },
   "devDependencies": {
